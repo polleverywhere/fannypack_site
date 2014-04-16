@@ -1,0 +1,16 @@
+# build 'middleman run'
+
+source './build'
+
+# Grab settings from .env file. See .env.sample for instruction on configuring
+# all of that business.
+target ENV['AWS_TARGET'], {
+  :provider               => 'AWS',
+  :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],
+  :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY']
+}
+
+# Set the cache on these for over a year
+path(/\.(png|jpg|gif|js|css)$/) do
+  self.cache_control = 'max-age=31536000'
+end
